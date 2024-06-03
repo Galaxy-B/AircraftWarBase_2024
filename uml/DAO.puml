@@ -1,0 +1,48 @@
+@startuml DAO
+
+class Record
+{
+    - record_id:int
+    - player_name:String
+    - score:int
+    - record_date:Date
+
+    + Record(int id, String name, int score, Date date)
+    + get_record_id():int
+    + get_player_name():String
+    + get_score():int
+    + get_record_date():Date
+    + set_record_id(int id):void
+    + set_player_name(String name):void
+    + set_score(int score):void
+    + set_record_date(Date date):void
+    + print(int rank):void
+}
+
+interface RecordDAO
+{
+    + {abstract} find_record(int id):Record
+    + {abstract} get_all_record():List<Record>
+    + {abstract} add_record(Record record):void
+    + {abstract} delete_record(int id):void
+    + {abstract} save_record():void
+}
+
+class RecordDAOImpl
+{
+    - id_count:int
+    - records:List<Record>
+    - path:String
+
+    + RecordDAOImpl()
+    + find_record(int id):Record
+    + get_all_record():List<Record>
+    + add_record(Record record):void
+    + delete_record(int id):void
+    + save_record():void
+}
+
+RecordDAO <|.. RecordDAOImpl
+RecordDAOImpl -right-> Record
+
+@enduml

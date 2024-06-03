@@ -1,2 +1,4 @@
 # AircraftWarBase_2024
-code for course 面向对象的软件构造导论 of HITSZ in spring semester, 2024
+2024年春季学期 面向对象的软件构造导论 实验课完整代码
+
+仅在windows平台完成各项测试

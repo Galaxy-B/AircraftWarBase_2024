@@ -1,0 +1,78 @@
+@startuml propFactory
+
+abstract class PropFactory
+{
+    + {abstract} createProp(int locationX, int locationY, int speedX, int speedY):AbstractProp
+}
+
+class HealPropFactory
+{
+    + createProp(int locationX, int locationY, int speedX, int speedY):AbstractProp
+}
+
+class BombPropFactory
+{
+    + createProp(int locationX, int locationY, int speedX, int speedY):AbstractProp
+}
+
+class FirePropFactory
+{
+    + createProp(int locationX, int locationY, int speedX, int speedY):AbstractProp
+}
+
+class FirePlusPropFactory
+{
+    + createProp(int locationX, int locationY, int speedX, int speedY):AbstractProp
+}
+
+PropFactory <|-down- HealPropFactory
+PropFactory <|-down- BombPropFactory
+PropFactory <|-up- FirePropFactory
+PropFactory <|-up- FirePlusPropFactory
+
+abstract class AbstractProp
+{
+    + AbstractProp(int locationX, int locationY, int speedX, int speedY)
+    + {abstract} takeEffect(AbstractAircraft aircraft):void
+}
+
+class HealProp
+{
+    + HealProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + takeEffect(AbstractAircraft aircraft):void
+}
+
+class FireProp
+{
+    + FireProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + takeEffect(AbstractAircraft aircraft):void
+}
+
+class FirePlusProp
+{
+    + FirePlusProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + takeEffect(AbstractAircraft aircraft):void
+}
+
+class BombProp
+{
+    - aircraftList:List<AbstractAircraft>
+
+    + BombProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + addAircraft(List<AbstractAircraft> aircrafts):void
+    + notifyAllAircraft():void
+    + takeEffect(AbstractAircraft aircraft):void
+}
+
+AbstractProp <|-down- HealProp
+AbstractProp <|-down- BombProp
+AbstractProp <|-up- FireProp
+AbstractProp <|-up- FirePlusProp
+
+PropFactory .right.> AbstractProp
+
+@enduml

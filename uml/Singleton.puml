@@ -1,0 +1,18 @@
+@startuml Singleton
+
+class HeroAircraft
+{
+    - {static} instance:HeroAircraft
+
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
+    + forward():void
+    + shoot():List<BaseBullet>
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void
+}
+
+HeroAircraft o--> HeroAircraft
+
+@enduml

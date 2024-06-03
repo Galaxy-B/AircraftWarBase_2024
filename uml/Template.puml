@@ -1,0 +1,68 @@
+@startuml Template
+
+class Game
+{
+    # backGroundTop:int
+    - executorService:ScheduledExecutorService
+    - timeInterval:int
+    # heroAircraft:HeroAircraft
+    # heroBullets:List<BaseBullet>
+    + {static} enemyAircrafts:List<AbstractAircraft>
+    + {static} enemyBullets:List<BaseBullet>
+    # props:List<AbstractProp>
+    - enemyFactory:List<EnemyFactory>
+    + propFactory:List<PropFactory>
+    # enemyCreator:EnemyCreator
+    # path:String
+    - recordDAO:RecordDAO
+    - rankList:RankList
+    + {static} main_bgm:BackgroundMusicThread
+    + {static} boss_bgm:BackgroundMusicThread
+    + {static} shootStrategyThread:ShootStrategyThread
+    # modeName:String
+    # enemyMaxNumber:int
+    + {static} score:int
+    - time:int
+    - cycleDuration:int
+    - cycleTime:int
+    - {static} gameOverFlag:boolean
+
+    + Game()
+    + action():void
+    - timeCountAndNewCycleJudge():boolean
+    - shootAction():void
+    - bulletsMoveAction():void
+    - aircraftsMoveAction():void
+    - propsMoveAction():void
+    - crashCheckAction():void
+    - postProcessAction():void
+    + {static} isGameOver():boolean
+}
+
+class EasyGame
+{
+    + EasyGame()
+    + paint(Graphics g):void
+    - paintImageWithPositionRevised(Graphics g, List<? extends AbstractFlyingObject> objects):void
+    - paintScoreAndLife(Graphics g):void 
+}
+
+class MediumGame
+{
+    + MediumGame()
+    + paint(Graphics g):void
+    - paintImageWithPositionRevised(Graphics g, List<? extends AbstractFlyingObject> objects):void
+    - paintScoreAndLife(Graphics g):void 
+}
+
+class HardGame
+{
+    + HardGame()
+    + paint(Graphics g):void
+    - paintImageWithPositionRevised(Graphics g, List<? extends AbstractFlyingObject> objects):void
+    - paintScoreAndLife(Graphics g):void 
+}
+
+Game <|-- EasyGame
+Game <|-- MediumGame
+Game <|-- HardGame

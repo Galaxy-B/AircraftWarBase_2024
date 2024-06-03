@@ -1,0 +1,96 @@
+@startuml Observer
+
+abstract class AbstractAircraft
+{
+	# maxHp:int
+    # hp:int
+    # shootNum:int
+    # power:int
+    # direction:int
+    # shootStrategy:ShootStrategy
+    
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp, int shootNum, int power, int direction, ShootStrategy shootStrategy)
+    + decreaseHp(int decrease):void
+    + getHp():int
+    + getDirection():int
+    + getShootNum():int
+    + getPower():int
+    + setShootNum(int num):void
+    + setShootStrategy(ShootStrategy shootStrategy):void
+    + executeShootStrategy():List<BaseBullet>
+    + {abstract} dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + {abstract} getScore():int
+    + {abstract} update():void
+}
+
+class HeroAircraft
+{
+    - {static} instance:HeroAircraft
+
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
+    + forward():void
+    + shoot():List<BaseBullet>
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void
+}
+
+class MobEnemy 
+{
+    - score:int
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int power)
+    + forward():void
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void
+}
+
+class EliteEnemy
+{
+    - score:int
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int power)
+    + forward():void
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void    
+}
+
+class ElitePlusEnemy
+{
+    - score:int
+    + ElitePlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int power)
+    + forward():void
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void    
+}
+
+class BossEnemy
+{
+    - score:int
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int power)
+    + forward():void
+    + dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + getScore():int
+    + update():void    
+}
+
+AbstractAircraft <|-- HeroAircraft
+AbstractAircraft <|-- MobEnemy
+AbstractAircraft <|-- EliteEnemy
+AbstractAircraft <|-- ElitePlusEnemy
+AbstractAircraft <|-- BossEnemy
+
+class BombProp
+{
+    - aircraftList:List<AbstractAircraft>
+
+    + BombProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + addAircraft(List<AbstractAircraft> aircrafts):void
+    + notifyAllAircraft():void
+    + takeEffect(AbstractAircraft aircraft):void
+}
+
+BombProp o--> AbstractAircraft

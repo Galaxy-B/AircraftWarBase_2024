@@ -7,6 +7,14 @@
 # BlueJ files
 *.ctxt
 
+# ignore configure of vscode
+.vscode/
+
+# ignore configure of idea
+.idea/
+.classpath
+*.iml
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

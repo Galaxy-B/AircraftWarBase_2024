@@ -1,0 +1,52 @@
+@startuml Strategy
+
+abstract class AbstractAircraft
+{
+	# maxHp:int
+    # hp:int
+    # shootNum:int
+    # power:int
+    # direction:int
+    # shootStrategy:ShootStrategy
+    
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp, int shootNum, int power, int direction, ShootStrategy shootStrategy)
+    + decreaseHp(int decrease):void
+    + getHp():int
+    + getDirection():int
+    + getShootNum():int
+    + getPower():int
+    + setShootNum(int num):void
+    + setShootStrategy(ShootStrategy shootStrategy):void
+    + executeShootStrategy():List<BaseBullet>
+    + {abstract} dropProp(List<PropFactory> propFactory):List<AbstractProp>
+    + {abstract} getScore():int
+    + {abstract} update():void
+}
+
+interface ShootStrategy
+{
+    + {abstract} shoot(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+class DirectShoot
+{
+    + shoot(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+class ScatteredShoot
+{
+    + shoot(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+class CircleShoot
+{
+    + shoot(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+AbstractAircraft o--> ShootStrategy
+
+ShootStrategy <|.. DirectShoot
+ShootStrategy <|.. ScatteredShoot
+ShootStrategy <|.. CircleShoot
+
+@enduml
